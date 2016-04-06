@@ -24,6 +24,33 @@
             app:layout_scrollFlags="scroll|exitUntilCollapsed"
             app:titleEnabled="false">
 
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                android:fitsSystemWindows="true"
+                android:gravity="center"
+                android:padding="32dp"
+                app:layout_collapseMode="parallax">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="?actionBarSize"
+                    android:textSize="16sp"
+                    android:text="A simple MOOC Client"/>
+
+                <TextView
+                    android:id="@+id/repository"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:autoLink="web"
+                    android:layout_marginTop="8dp"
+                    android:text="@string/url_repository"/>
+
+
+            </LinearLayout>
+
             <android.support.v7.widget.Toolbar
                 android:id="@+id/toolbar"
                 android:layout_width="match_parent"
@@ -35,8 +62,17 @@
         </android.support.design.widget.CollapsingToolbarLayout>
     </android.support.design.widget.AppBarLayout>
 
-    <include layout="@layout/content_about"/>
-
+    <!--<include layout="@layout/content_about"/>-->
+    <android.support.v7.widget.RecyclerView
+        android:id="@+id/about_recyclerview"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:clipToPadding="false"
+        android:fitsSystemWindows="true"
+        android:scrollbars="vertical"
+        tools:listitem="@layout/item_about"
+        app:layout_behavior="@string/appbar_scrolling_view_behavior"
+        />
 
 
 </android.support.design.widget.CoordinatorLayout>

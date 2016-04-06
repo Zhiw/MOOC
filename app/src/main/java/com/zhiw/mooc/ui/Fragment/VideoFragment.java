@@ -1,6 +1,5 @@
 package com.zhiw.mooc.ui.Fragment;
 
-import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 import android.os.Handler;
@@ -127,6 +126,7 @@ public class VideoFragment extends BaseFragment implements IVideoView{
             public void onItemClick(View view, int position) {
                 Intent intent = new Intent(fragmentActivity, VideoActivity.class);
 //                intent.putExtra(VideoActivity.EXTRA_URL,"");
+//                intent.putExtra(VideoActivity.EXTRA_TITLE,"");
                 startActivity(intent);
             }
         };
@@ -140,16 +140,6 @@ public class VideoFragment extends BaseFragment implements IVideoView{
 
     }
 
-    @Override
-    public void onAttach(Context context) {
-        super.onAttach(context);
-    }
-
-    @Override
-    public void onDetach() {
-        super.onDetach();
-        LogTool.e("detach");
-    }
 
     @Override
     public void onDestroyView() {
@@ -157,21 +147,5 @@ public class VideoFragment extends BaseFragment implements IVideoView{
         ButterKnife.unbind(this);
     }
 
-    @Override
-    public void onPause() {
-        super.onPause();
-        LogTool.e("pause");
-    }
 
-    @Override
-    public void onStop() {
-        super.onStop();
-        LogTool.e("stop");
-    }
-
-    @Override
-    public void onResume() {
-        super.onResume();
-        LogTool.e("resume");
-    }
 }

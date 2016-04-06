@@ -14,7 +14,6 @@ import butterknife.Bind;
 import butterknife.ButterKnife;
 import io.vov.vitamio.LibsChecker;
 import io.vov.vitamio.MediaPlayer;
-import io.vov.vitamio.utils.Log;
 import io.vov.vitamio.widget.MediaController;
 import io.vov.vitamio.widget.VideoView;
 
@@ -24,6 +23,7 @@ public class VideoActivity extends BaseActivity {
     VideoView mVideoView;
 
     public static final String EXTRA_URL = "url";
+    public static final String EXTRA_TITLE = "title";
 
 
     @Override
@@ -37,16 +37,15 @@ public class VideoActivity extends BaseActivity {
 //        String defaultPath = Environment.getExternalStorageDirectory() + "/test.mov";
         String defaultPath = "http://www.modrails.com/videos/passenger_nginx.mov";
         String url = getIntent().hasExtra(EXTRA_URL) ? getIntent().getStringExtra(EXTRA_URL) : defaultPath;
+        String title = getIntent().getStringExtra(EXTRA_TITLE);
+        setTitle(title);
 
 //        showLoadingView(true);
 
         mVideoView = (VideoView) findViewById(R.id.video_view);
-        MediaPlayer player = new MediaPlayer(this);
-        Log.e(url);
 
         mVideoView.setVideoPath(url);
         mVideoView.setMediaController(new MediaController(this));
-//        MediaController controller = new MediaController(this);
         mVideoView.requestFocus();
         mVideoView.setOnPreparedListener(new MediaPlayer.OnPreparedListener() {
             @Override

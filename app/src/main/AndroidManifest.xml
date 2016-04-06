@@ -73,6 +73,15 @@
                 android:name="android.support.PARENT_ACTIVITY"
                 android:value="com.zhiw.mooc.framework.base.BaseActivity"/>
         </activity>
+
+        <activity
+            android:name="com.thefinestartist.finestwebview.FinestWebViewActivity"
+            android:configChanges="keyboardHidden|orientation|screenSize"
+            android:screenOrientation="sensor"
+            android:theme="@style/WebViewTheme"
+            />
+            <!--android:theme="@style/FinestWebViewTheme.Light" -->
+            <!--/>-->
     </application>
 
 </manifest>

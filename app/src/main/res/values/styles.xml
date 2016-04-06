@@ -21,4 +21,10 @@
         <item name="colorAccent">#2196F3</item>
     </style>
 
+    <style name="WebViewTheme" parent="FinestWebViewTheme.Light">
+        <item name="colorPrimary">@color/colorPrimary</item>
+        <item name="colorPrimaryDark">@color/colorPrimaryDark</item>
+        <item name="colorAccent">@color/white</item>
+    </style>
+
 </resources>
