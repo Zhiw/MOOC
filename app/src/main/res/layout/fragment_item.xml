@@ -30,6 +30,8 @@
     android:foreground="?android:attr/selectableItemBackground"
     android:layout_marginStart="8dp"
     android:layout_marginEnd="8dp"
+    android:layout_marginTop="6dp"
+    android:layout_marginBottom="6dp"
     app:cardCornerRadius="8dp"
     app:cardElevation="4dp">
     <RelativeLayout
@@ -40,11 +42,12 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:textAppearance="?attr/textAppearanceListItem"
+            android:textColor="@color/primaryText"
             tools:text="hello"
             android:layout_marginLeft="@dimen/text_margin"
-            android:layout_marginTop="@dimen/text_margin"
+            android:layout_marginTop="@dimen/margin_middle"
             android:layout_marginRight="@dimen/text_margin"
-            android:layout_marginBottom="8dp"/>
+            android:layout_marginBottom="@dimen/margin_middle"/>
 
         <TextView
             android:id="@+id/content"
@@ -54,8 +57,9 @@
             android:layout_marginStart="@dimen/text_margin"
             android:layout_marginEnd="@dimen/text_margin"
             android:layout_marginBottom="@dimen/margin_middle"
-            android:textAppearance="?attr/textAppearanceListItem"
+            android:textAppearance="@style/TextAppearance.AppCompat.Body1"
             android:layout_below="@id/id"
+            android:textColor="@color/secondaryText"
             tools:text="world"/>
         <TextView
             android:id="@+id/school"
@@ -63,13 +67,14 @@
             android:layout_height="wrap_content"
             android:layout_toEndOf="@id/content"
             android:layout_alignTop="@id/content"
-            android:textAppearance="?attr/textAppearanceListItem"
+            android:textAppearance="@style/TextAppearance.AppCompat.Body1"
+            android:textColor="@color/secondaryText"
             tools:text="code"
             />
         <jp.shts.android.library.TriangleLabelView
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:layout_alignParentRight="true"
+            android:layout_alignParentEnd="true"
             android:layout_alignParentTop="true"
             app:backgroundColor="@color/yellow_900"
             app:corner="rightTop"

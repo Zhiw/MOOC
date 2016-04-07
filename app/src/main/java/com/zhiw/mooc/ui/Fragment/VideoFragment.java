@@ -19,7 +19,6 @@ import com.zhiw.mooc.presenter.VideoPresenter;
 import com.zhiw.mooc.ui.Activity.VideoActivity;
 import com.zhiw.mooc.ui.IView.IVideoView;
 import com.zhiw.mooc.ui.widgets.SpaceItemDecoration;
-import com.zhiw.mooc.utils.LogTool;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -64,13 +63,12 @@ public class VideoFragment extends BaseFragment implements IVideoView{
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-        LogTool.e("create view");
         View view = inflater.inflate(R.layout.fragment_video_list, container, false);
         ButterKnife.bind(this, view);
 
         mPresenter = new VideoPresenter(fragmentActivity,this);
         mPresenter.init(view);
-//        mPresenter.getData();
+        mPresenter.getData();
 
         return view;
     }
@@ -94,9 +92,9 @@ public class VideoFragment extends BaseFragment implements IVideoView{
         mRecyclerView.setAdapter(mAdapter);
 
         mRecyclerView.setItemAnimator(new DefaultItemAnimator());
-        mRecyclerView.addItemDecoration(new SpaceItemDecoration(14));
+        mRecyclerView.addItemDecoration(new SpaceItemDecoration(4));
 
-        mSwipe.setColorSchemeColors(R.color.colorAccent, R.color.colorPrimary,R.color.yellow_500);
+        mSwipe.setColorSchemeResources(android.R.color.holo_blue_light, android.R.color.holo_red_light, android.R.color.holo_orange_light, android.R.color.holo_green_light);
         mSwipe.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
             @Override
             public void onRefresh() {

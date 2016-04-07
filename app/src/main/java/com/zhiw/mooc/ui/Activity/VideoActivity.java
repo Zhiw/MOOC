@@ -34,7 +34,7 @@ public class VideoActivity extends BaseActivity {
         }
         setContentView(R.layout.activity_video);
         ButterKnife.bind(this);
-//        String defaultPath = Environment.getExternalStorageDirectory() + "/test.mov";
+//        String defaultPath = FileUtil.getRootPath() + "/test.mov";
         String defaultPath = "http://www.modrails.com/videos/passenger_nginx.mov";
         String url = getIntent().hasExtra(EXTRA_URL) ? getIntent().getStringExtra(EXTRA_URL) : defaultPath;
         String title = getIntent().getStringExtra(EXTRA_TITLE);
@@ -57,23 +57,29 @@ public class VideoActivity extends BaseActivity {
         mVideoView.setOnBufferingUpdateListener(new MediaPlayer.OnBufferingUpdateListener() {
             @Override
             public void onBufferingUpdate(MediaPlayer mp, int percent) {
-                LogTool.e(""+percent);
+                LogTool.e("" + percent);
 
             }
         });
         int percentage = mVideoView.getBufferPercentage();
-        LogTool.e(""+percentage);
-//        mVideoView.pause();
+        LogTool.e("" + percentage);
         FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.fab);
         fab.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 Snackbar.make(view, "Replace with your own action", Snackbar.LENGTH_LONG)
                         .setAction("Action", null).show();
-                Intent intent = new Intent(VideoActivity.this,ScrollingActivity.class);
+                Intent intent = new Intent(VideoActivity.this, ScrollingActivity.class);
                 startActivity(intent);
             }
         });
     }
 
+    @Override
+    protected void onDestroy() {
+        super.onDestroy();
+        if (mVideoView!=null){
+            mVideoView.stopPlayback();
+        }
+    }
 }
