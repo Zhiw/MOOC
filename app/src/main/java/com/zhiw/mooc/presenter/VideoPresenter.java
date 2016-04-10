@@ -5,7 +5,6 @@ import android.app.Activity;
 import com.zhiw.mooc.framework.base.BasePresenter;
 import com.zhiw.mooc.model.Video;
 import com.zhiw.mooc.ui.IView.IVideoView;
-import com.zhiw.mooc.utils.ToastUtil;
 
 import java.util.List;
 
@@ -27,7 +26,7 @@ public class VideoPresenter extends BasePresenter<IVideoView> {
         query.findObjects(activity, new FindListener<Video>() {
             @Override
             public void onSuccess(List<Video> list) {
-                ToastUtil.get().showShortToast(activity,"Get Success");
+//                ToastUtil.get().showShortToast(activity,"Get Success");
                 viewImpl.refreshUI(list);
             }
 

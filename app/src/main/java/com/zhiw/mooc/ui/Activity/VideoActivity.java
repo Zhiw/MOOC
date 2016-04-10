@@ -8,13 +8,14 @@ import android.view.View;
 
 import com.zhiw.mooc.R;
 import com.zhiw.mooc.framework.base.BaseActivity;
+import com.zhiw.mooc.ui.widgets.MyMediaController;
+import com.zhiw.mooc.utils.FileUtil;
 import com.zhiw.mooc.utils.LogTool;
 
 import butterknife.Bind;
 import butterknife.ButterKnife;
 import io.vov.vitamio.LibsChecker;
 import io.vov.vitamio.MediaPlayer;
-import io.vov.vitamio.widget.MediaController;
 import io.vov.vitamio.widget.VideoView;
 
 public class VideoActivity extends BaseActivity {
@@ -34,8 +35,9 @@ public class VideoActivity extends BaseActivity {
         }
         setContentView(R.layout.activity_video);
         ButterKnife.bind(this);
-//        String defaultPath = FileUtil.getRootPath() + "/test.mov";
-        String defaultPath = "http://www.modrails.com/videos/passenger_nginx.mov";
+        String defaultPath = FileUtil.getRootPath() + "/test.mov";
+        LogTool.e(defaultPath);
+//        String defaultPath = "http://www.modrails.com/videos/passenger_nginx.mov";
         String url = getIntent().hasExtra(EXTRA_URL) ? getIntent().getStringExtra(EXTRA_URL) : defaultPath;
         String title = getIntent().getStringExtra(EXTRA_TITLE);
         setTitle(title);
@@ -43,9 +45,13 @@ public class VideoActivity extends BaseActivity {
 //        showLoadingView(true);
 
         mVideoView = (VideoView) findViewById(R.id.video_view);
-
         mVideoView.setVideoPath(url);
-        mVideoView.setMediaController(new MediaController(this));
+        final MyMediaController myMediaController = new MyMediaController(this);
+        int windowHeight = getResources().getDisplayMetrics().heightPixels;
+
+        myMediaController.setPadding(0,0,0,windowHeight - 594);
+
+        mVideoView.setMediaController(myMediaController);
         mVideoView.requestFocus();
         mVideoView.setOnPreparedListener(new MediaPlayer.OnPreparedListener() {
             @Override
@@ -54,15 +60,6 @@ public class VideoActivity extends BaseActivity {
             }
         });
 
-        mVideoView.setOnBufferingUpdateListener(new MediaPlayer.OnBufferingUpdateListener() {
-            @Override
-            public void onBufferingUpdate(MediaPlayer mp, int percent) {
-                LogTool.e("" + percent);
-
-            }
-        });
-        int percentage = mVideoView.getBufferPercentage();
-        LogTool.e("" + percentage);
         FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.fab);
         fab.setOnClickListener(new View.OnClickListener() {
             @Override

@@ -27,6 +27,8 @@ public class AboutActivity extends BaseActivity {
     RecyclerView mAboutRecyclerview;
     @Bind(R.id.repository)
     TextView mRepository;
+    @Bind(R.id.github)
+    TextView mGithub;
 
     private ArrayMap<String, String> mLibsList;
 
@@ -45,16 +47,28 @@ public class AboutActivity extends BaseActivity {
         mLibsList.put("RecyclerView", "http://developer.android.com/reference/android/support/v7/widget/RecyclerView.html");
         mLibsList.put("Material", "https://www.google.com/design/spec/material-design/introduction.html");
         mLibsList.put("Facebook/Fresco","https://github.com/facebook/fresco");
-        mLibsList.put("TriangleLabelView","https://github.com/shts/TriangleLabelView");
-        mLibsList.put("FinestWebView","https://github.com/TheFinestArtist/FinestWebView-Android");
-        mLibsList.put("NavigationView","http://developer.android.com/reference/android/support/design/widget/NavigationView.html");
-        mLibsList.put("ButterKnife","http://jakewharton.github.io/butterknife/");
+        mLibsList.put("TriangleLabelView", "https://github.com/shts/TriangleLabelView");
+        mLibsList.put("FinestWebView", "https://github.com/TheFinestArtist/FinestWebView-Android");
+        mLibsList.put("NavigationView", "http://developer.android.com/reference/android/support/design/widget/NavigationView.html");
+        mLibsList.put("ButterKnife", "http://jakewharton.github.io/butterknife/");
 
         AboutAdapter adapter = new AboutAdapter();
         mAboutRecyclerview.setAdapter(adapter);
         mAboutRecyclerview.setLayoutManager(new LinearLayoutManager(this));
 
-        CharSequence text = mRepository.getText();
+        setAutoLinkTextView(mRepository);
+        setAutoLinkTextView(mGithub);
+
+
+    }
+
+    /**
+     * 自定义设置了AutoLink的TextView点击事件
+     * @param textView android:autoLink="web"
+     */
+    private void setAutoLinkTextView(TextView textView){
+        CharSequence text = textView.getText();
+
         if (text instanceof Spannable){
             int end = text.length();
             Spannable sp = (Spannable)text;
@@ -66,17 +80,14 @@ public class AboutActivity extends BaseActivity {
                 style.setSpan(myURLSpan, sp.getSpanStart(urlSpan),
                         sp.getSpanEnd(urlSpan),
                         Spannable.SPAN_EXCLUSIVE_INCLUSIVE);
-
             }
-            mRepository.setText(style);
-
-
+            textView.setText(style);
         }
-
-
-
     }
 
+    /**
+     * 设置点击事件
+     */
     private class MyURLSpan extends ClickableSpan{
 
         private String url;
