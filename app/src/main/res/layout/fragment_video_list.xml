@@ -15,6 +15,6 @@
         app:layoutManager="LinearLayoutManager"
         app:layout_behavior="@string/appbar_scrolling_view_behavior"
         tools:context="com.zhiw.mooc.ui.Fragment.VideoFragment"
-        tools:listitem="@layout/fragment_video"/>
+        tools:listitem="@layout/fragment_item"/>
 </android.support.v4.widget.SwipeRefreshLayout>
 

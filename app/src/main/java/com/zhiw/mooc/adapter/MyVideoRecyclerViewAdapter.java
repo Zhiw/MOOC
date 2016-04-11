@@ -73,6 +73,10 @@ public class MyVideoRecyclerViewAdapter extends RecyclerView.Adapter<MyVideoRecy
         notifyItemInserted(position);
     }
 
+    public Video getDataFrom(int position){
+        return mList.get(position);
+    }
+
     public class ViewHolder extends RecyclerView.ViewHolder {
         public final View mView;
         public final TextView mTitleView;

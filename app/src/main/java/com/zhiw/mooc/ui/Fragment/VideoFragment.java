@@ -41,7 +41,6 @@ public class VideoFragment extends BaseFragment implements IVideoView{
 
     private MyVideoRecyclerViewAdapter mAdapter;
     private VideoPresenter mPresenter;
-    private MyVideoRecyclerViewAdapter.OnItemClickListener mListener;
 
     /**
      * Mandatory empty constructor for the fragment manager to instantiate the
@@ -105,9 +104,6 @@ public class VideoFragment extends BaseFragment implements IVideoView{
                         Video video = new Video();
                         video.setTitle("Google");
                         mAdapter.insertData(6);
-//                        List<Video> list = new ArrayList<>();
-//                        list.add(video);
-//                        mAdapter.addData(list);
                         mSwipe.setRefreshing(false);
                     }
                 }, 3000);
@@ -119,17 +115,17 @@ public class VideoFragment extends BaseFragment implements IVideoView{
 
     @Override
     public void initListener() {
-        mListener = new MyVideoRecyclerViewAdapter.OnItemClickListener() {
+        MyVideoRecyclerViewAdapter.OnItemClickListener listener = new MyVideoRecyclerViewAdapter.OnItemClickListener() {
             @Override
             public void onItemClick(View view, int position) {
                 Intent intent = new Intent(fragmentActivity, VideoActivity.class);
-//                intent.putExtra(VideoActivity.EXTRA_URL,"");
-//                intent.putExtra(VideoActivity.EXTRA_TITLE,"");
+//                intent.putExtra(VideoActivity.EXTRA_URL,mAdapter.getDataFrom(position).getUrl());
+//                intent.putExtra(VideoActivity.EXTRA_TITLE,mAdapter.getDataFrom(position).getTitle());
                 startActivity(intent);
             }
         };
 
-        mAdapter.setOnItemClickListener(mListener);
+        mAdapter.setOnItemClickListener(listener);
 
     }
 

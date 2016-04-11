@@ -3,12 +3,24 @@ package com.zhiw.mooc.ui.Fragment;
 import android.content.Context;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
+import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
 import com.zhiw.mooc.R;
+import com.zhiw.mooc.adapter.DocumentRecyclerViewAdapter;
 import com.zhiw.mooc.framework.base.BaseFragment;
+import com.zhiw.mooc.model.Document;
+import com.zhiw.mooc.presenter.DocumentPresenter;
+import com.zhiw.mooc.ui.IView.IDocumentView;
+import com.zhiw.mooc.utils.FileUtil;
+
+import java.util.ArrayList;
+import java.util.List;
+
+import butterknife.Bind;
+import butterknife.ButterKnife;
 
 /**
  * A simple {@link Fragment} subclass.
@@ -16,13 +28,15 @@ import com.zhiw.mooc.framework.base.BaseFragment;
  * Use the {@link DocumentFragment#newInstance} factory method to
  * create an instance of this fragment.
  */
-public class DocumentFragment extends BaseFragment {
+public class DocumentFragment extends BaseFragment implements IDocumentView {
     // TODO: Rename parameter arguments, choose names that match
     // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
     private static final String ARG_PARAM1 = "param1";
     private static final String ARG_PARAM2 = "param2";
 
     public static final String TAG = "Document";
+    @Bind(R.id.recycler_view)
+    RecyclerView mRecyclerView;
 
 
     // TODO: Rename and change types of parameters
@@ -30,19 +44,14 @@ public class DocumentFragment extends BaseFragment {
     private String mParam2;
 
 
+    private DocumentPresenter mPresenter;
+    private DocumentRecyclerViewAdapter mAdapter;
+
     public DocumentFragment() {
         // Required empty public constructor
     }
 
-    /**
-     * Use this factory method to create a new instance of
-     * this fragment using the provided parameters.
-     *
-     * @param param1 Parameter 1.
-     * @param param2 Parameter 2.
-     * @return A new instance of fragment DocumentFragment.
-     */
-    // TODO: Rename and change types and number of parameters
+
     public static DocumentFragment newInstance(String param1, String param2) {
         DocumentFragment fragment = new DocumentFragment();
         Bundle args = new Bundle();
@@ -64,8 +73,12 @@ public class DocumentFragment extends BaseFragment {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-        // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_docment, container, false);
+        View view = inflater.inflate(R.layout.fragment_docment, container, false);
+        ButterKnife.bind(this, view);
+        mPresenter = new DocumentPresenter(fragmentActivity, this);
+        mPresenter.init(view);
+        mPresenter.getData();
+        return view;
     }
 
 
@@ -80,5 +93,55 @@ public class DocumentFragment extends BaseFragment {
         super.onDetach();
     }
 
+    @Override
+    public void initView(View view) {
+        mAdapter = new DocumentRecyclerViewAdapter();
+        mRecyclerView.setAdapter(mAdapter);
+        List<Document> list = new ArrayList<>();
+        for (int i = 'A'; i < 'z'; i++) {
+            Document document = new Document();
+            document.setTitle("" + (char) i);
+            list.add(document);
+        }
+        mAdapter.addData(list);
 
+    }
+
+    @Override
+    public void initListener() {
+        DocumentRecyclerViewAdapter.OnItemClickListener listener = new DocumentRecyclerViewAdapter.OnItemClickListener() {
+            @Override
+            public void onItemClick(View view, int position) {
+//                String url = mAdapter.getDataFrom(position).getUrl();
+                String temp = FileUtil.getRootPath()+"test.pptx";
+                startActivity(FileUtil.getFileIntent(temp));
+
+            }
+
+            @Override
+            public void onDownLoadClick(View view, int position) {
+                // TODO: 16/4/10 download
+
+
+            }
+        };
+        mAdapter.setListener(listener);
+
+    }
+
+    @Override
+    public void showLoading(boolean show) {
+
+    }
+
+    @Override
+    public void onDestroyView() {
+        super.onDestroyView();
+        ButterKnife.unbind(this);
+    }
+
+    @Override
+    public void refresh(List<Document> list) {
+        mAdapter.addData(list);
+    }
 }

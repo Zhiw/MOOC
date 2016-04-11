@@ -8,10 +8,19 @@ import cn.bmob.v3.BmobObject;
  * Created by zhiw on 16/3/26.
  */
 public class Video extends BmobObject {
+    private String subject;
     private String title;
     private String teacher;
     private String school;
     private String url;
+
+    public String getSubject() {
+        return subject;
+    }
+
+    public void setSubject(String subject) {
+        this.subject = subject;
+    }
 
     public String getTitle() {
         return title;
