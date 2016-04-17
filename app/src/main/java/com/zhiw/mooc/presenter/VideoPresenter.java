@@ -26,7 +26,6 @@ public class VideoPresenter extends BasePresenter<IVideoView> {
         query.findObjects(activity, new FindListener<Video>() {
             @Override
             public void onSuccess(List<Video> list) {
-//                ToastUtil.get().showShortToast(activity,"Get Success");
                 viewImpl.refreshUI(list);
             }
 

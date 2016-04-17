@@ -27,6 +27,7 @@
                 android:id="@+id/title"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:layout_marginBottom="@dimen/margin_middle"
                 android:textAppearance="?attr/textAppearanceListItem"
                 tools:text="于志伟"/>
 
@@ -49,7 +50,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:textColor="@color/secondaryText"
-            tools:text="于志伟"/>
+                tools:text="于志伟"/>
             <TextView
                 android:id="@+id/school"
                 android:layout_width="wrap_content"

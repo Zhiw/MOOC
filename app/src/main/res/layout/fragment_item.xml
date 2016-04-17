@@ -41,13 +41,13 @@
             android:id="@+id/id"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:layout_marginBottom="@dimen/margin_middle"
+            android:layout_marginLeft="@dimen/text_margin"
+            android:layout_marginRight="@dimen/text_margin"
+            android:layout_marginTop="@dimen/margin_middle"
             android:textAppearance="?attr/textAppearanceListItem"
             android:textColor="@color/primaryText"
-            tools:text="hello"
-            android:layout_marginLeft="@dimen/text_margin"
-            android:layout_marginTop="@dimen/margin_middle"
-            android:layout_marginRight="@dimen/text_margin"
-            android:layout_marginBottom="@dimen/margin_middle"/>
+            tools:text="hello"/>
 
         <TextView
             android:id="@+id/content"

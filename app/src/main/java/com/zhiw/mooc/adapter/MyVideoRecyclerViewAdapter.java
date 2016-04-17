@@ -10,6 +10,7 @@ import android.widget.TextView;
 import com.zhiw.mooc.R;
 import com.zhiw.mooc.model.Video;
 
+import java.util.ArrayList;
 import java.util.List;
 
 
@@ -19,8 +20,8 @@ public class MyVideoRecyclerViewAdapter extends RecyclerView.Adapter<MyVideoRecy
 
     private OnItemClickListener mOnItemClickListener;
 
-    public MyVideoRecyclerViewAdapter(List<Video> items) {
-        mList = items;
+    public MyVideoRecyclerViewAdapter() {
+        mList = new ArrayList<>();
     }
 
     public void setOnItemClickListener(OnItemClickListener onItemClickListener) {

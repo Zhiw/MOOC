@@ -1,6 +1,8 @@
 package com.zhiw.mooc.ui.Fragment;
 
+import android.content.ComponentName;
 import android.content.Context;
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v7.widget.RecyclerView;
@@ -15,8 +17,8 @@ import com.zhiw.mooc.model.Document;
 import com.zhiw.mooc.presenter.DocumentPresenter;
 import com.zhiw.mooc.ui.IView.IDocumentView;
 import com.zhiw.mooc.utils.FileUtil;
+import com.zhiw.mooc.utils.ToastUtil;
 
-import java.util.ArrayList;
 import java.util.List;
 
 import butterknife.Bind;
@@ -97,13 +99,6 @@ public class DocumentFragment extends BaseFragment implements IDocumentView {
     public void initView(View view) {
         mAdapter = new DocumentRecyclerViewAdapter();
         mRecyclerView.setAdapter(mAdapter);
-        List<Document> list = new ArrayList<>();
-        for (int i = 'A'; i < 'z'; i++) {
-            Document document = new Document();
-            document.setTitle("" + (char) i);
-            list.add(document);
-        }
-        mAdapter.addData(list);
 
     }
 
@@ -113,8 +108,14 @@ public class DocumentFragment extends BaseFragment implements IDocumentView {
             @Override
             public void onItemClick(View view, int position) {
 //                String url = mAdapter.getDataFrom(position).getUrl();
-                String temp = FileUtil.getRootPath()+"test.pptx";
-                startActivity(FileUtil.getFileIntent(temp));
+                String temp = FileUtil.getRootPath()+"/test.pptx";
+                Intent intent = FileUtil.getFileIntent(temp);
+                ComponentName name = intent.resolveActivity(fragmentActivity.getPackageManager());
+                if (name!=null){
+                    startActivity(intent);
+                }else {
+                    ToastUtil.get().showShortToast(fragmentActivity,"No app to open this file");
+                }
 
             }
 
