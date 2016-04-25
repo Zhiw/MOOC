@@ -206,7 +206,7 @@ public class MainActivity extends BaseActivity
         ViewPagerAdapter adapter = new ViewPagerAdapter(getSupportFragmentManager());
         VideoFragment videoFragment = VideoFragment.newInstance();
         DocumentFragment documentFragment = DocumentFragment.newInstance("", "");
-        TestFragment testFragment = TestFragment.newInstance("", "");
+        TestFragment testFragment = TestFragment.newInstance();
 
         adapter.addFragment(videoFragment, VideoFragment.TAG);
         adapter.addFragment(documentFragment, DocumentFragment.TAG);
