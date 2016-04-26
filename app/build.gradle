@@ -19,6 +19,7 @@ android {
     }
 }
 
+
 dependencies {
     compile fileTree(dir: 'libs', include: ['*.jar'])
     testCompile 'junit:junit:4.12'
@@ -36,5 +37,5 @@ dependencies {
     compile 'com.facebook.fresco:fresco:0.6.0'
     compile 'com.github.shts:TriangleLabelView:1.0.0'
     compile 'com.thefinestartist:finestwebview:1.2.1'
-
+    compile files('libs/BaiduLBS_Android.jar')
 }

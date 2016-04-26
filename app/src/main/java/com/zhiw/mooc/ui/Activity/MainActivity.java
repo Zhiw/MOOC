@@ -179,6 +179,7 @@ public class MainActivity extends BaseActivity
 
         if (id == R.id.nav_camera) {
             // Handle the camera action
+            startActivity(SignInActivity.class);
         } else if (id == R.id.nav_gallery) {
 //            boolean isDefault = !SPHelper.getTheme(this);
 //            SPHelper.setTheme(this, isDefault);
