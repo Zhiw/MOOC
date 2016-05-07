@@ -6,11 +6,11 @@ import com.zhiw.mooc.model.Document;
 import java.util.List;
 
 /**
- * ClassName: IDocumentView
+ * ClassName: DocumentView
  * Desc:
  * Created by zhiw on 16/4/10.
  */
-public interface IDocumentView extends BaseView {
+public interface DocumentView extends BaseView {
 
     void refresh(List<Document> list);
 

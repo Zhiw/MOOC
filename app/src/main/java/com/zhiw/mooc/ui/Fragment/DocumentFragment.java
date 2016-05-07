@@ -15,7 +15,7 @@ import com.zhiw.mooc.adapter.DocumentRecyclerViewAdapter;
 import com.zhiw.mooc.framework.base.BaseFragment;
 import com.zhiw.mooc.model.Document;
 import com.zhiw.mooc.presenter.DocumentPresenter;
-import com.zhiw.mooc.ui.IView.IDocumentView;
+import com.zhiw.mooc.ui.IView.DocumentView;
 import com.zhiw.mooc.utils.FileUtil;
 import com.zhiw.mooc.utils.ToastUtil;
 
@@ -30,7 +30,7 @@ import butterknife.ButterKnife;
  * Use the {@link DocumentFragment#newInstance} factory method to
  * create an instance of this fragment.
  */
-public class DocumentFragment extends BaseFragment implements IDocumentView {
+public class DocumentFragment extends BaseFragment implements DocumentView {
     // TODO: Rename parameter arguments, choose names that match
     // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
     private static final String ARG_PARAM1 = "param1";

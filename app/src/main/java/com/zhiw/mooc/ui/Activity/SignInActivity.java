@@ -2,6 +2,8 @@ package com.zhiw.mooc.ui.Activity;
 
 import android.os.Bundle;
 import android.view.View;
+import android.widget.Button;
+import android.widget.EditText;
 
 import com.baidu.location.BDLocation;
 import com.baidu.location.BDLocationListener;
@@ -11,21 +13,35 @@ import com.baidu.location.Poi;
 import com.zhiw.mooc.R;
 import com.zhiw.mooc.framework.base.BaseActivity;
 import com.zhiw.mooc.presenter.SignInPresenter;
-import com.zhiw.mooc.ui.IView.ISignInView;
+import com.zhiw.mooc.ui.IView.SignInView;
 import com.zhiw.mooc.utils.LogTool;
 
 import java.util.List;
 
-public class SignInActivity extends BaseActivity implements ISignInView {
+import butterknife.Bind;
+import butterknife.ButterKnife;
+import butterknife.OnClick;
+
+public class SignInActivity extends BaseActivity implements SignInView {
     public LocationClient mLocationClient = null;
     public BDLocationListener myListener = new MyLocationListener();
+    @Bind(R.id.sign_in_button)
+    Button mSignInButton;
+    @Bind(R.id.course_code)
+    EditText mCourseCode;
 
     private SignInPresenter mPresenter;
+
+    private double latitude;
+    private double longitude;
+    private String address;
+    private String description;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_sign_in);
+        ButterKnife.bind(this);
         mPresenter = new SignInPresenter(this, this);
         mPresenter.init();
 
@@ -33,6 +49,7 @@ public class SignInActivity extends BaseActivity implements ISignInView {
 
     @Override
     public void initView(View view) {
+        setTitle("SIGN IN");
         mLocationClient = new LocationClient(getApplicationContext());
         mLocationClient.registerLocationListener(myListener);
         initLocation();
@@ -47,6 +64,31 @@ public class SignInActivity extends BaseActivity implements ISignInView {
     @Override
     public void showLoading(boolean show) {
 
+    }
+
+    @Override
+    public double getLatitude() {
+        return latitude;
+    }
+
+    @Override
+    public double getLongitude() {
+        return longitude;
+    }
+
+    @Override
+    public String getAddress() {
+        return address;
+    }
+
+    @Override
+    public String getDescription() {
+        return description;
+    }
+
+    @Override
+    public String getCode() {
+        return mCourseCode.getText().toString().trim();
     }
 
     @Override
@@ -75,10 +117,20 @@ public class SignInActivity extends BaseActivity implements ISignInView {
         mLocationClient.setLocOption(option);
     }
 
+    @OnClick(R.id.sign_in_button)
+    public void onClick() {
+        mPresenter.signIn();
+    }
+
     public class MyLocationListener implements BDLocationListener {
 
         @Override
         public void onReceiveLocation(BDLocation location) {
+
+            latitude = location.getLatitude();
+            longitude = location.getLongitude();
+            address = location.getAddrStr();
+            description = location.getLocationDescribe();
             //Receive Location
             StringBuffer sb = new StringBuffer(256);
             sb.append("time : ");
@@ -138,6 +190,7 @@ public class SignInActivity extends BaseActivity implements ISignInView {
                 }
             }
             LogTool.i("BaiduLocationApiDem", sb.toString());
+            mLocationClient.stop();
         }
     }
 }

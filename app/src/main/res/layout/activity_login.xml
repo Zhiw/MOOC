@@ -44,6 +44,8 @@
                     android:layout_height="wrap_content"
                     android:hint="@string/prompt_user_name"
                     android:inputType="textEmailAddress"
+                    android:drawableStart="@drawable/ic_account_box_black_24dp"
+                    android:drawablePadding="4dp"
                     android:maxLines="1"
                     android:singleLine="true"/>
 
@@ -62,6 +64,8 @@
                     android:imeActionId="@+id/login"
                     android:imeActionLabel="@string/action_sign_in_short"
                     android:imeOptions="actionUnspecified"
+                    android:drawableStart="@drawable/ic_security_black_24dp"
+                    android:drawablePadding="4dp"
                     android:inputType="textPassword"
                     android:maxLines="1"
                     android:singleLine="true"/>

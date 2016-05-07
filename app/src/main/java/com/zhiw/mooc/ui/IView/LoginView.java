@@ -3,11 +3,11 @@ package com.zhiw.mooc.ui.IView;
 import com.zhiw.mooc.framework.base.BaseView;
 
 /**
- * ClassName: ILoginView
+ * ClassName: LoginView
  * Desc:
  * Created by zhiw on 16/3/30.
  */
-public interface ILoginView extends BaseView{
+public interface LoginView extends BaseView{
 
     String getUserName();
 

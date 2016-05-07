@@ -13,7 +13,7 @@ import com.zhiw.mooc.adapter.TestRecyclerViewAdapter;
 import com.zhiw.mooc.framework.base.BaseFragment;
 import com.zhiw.mooc.model.Test;
 import com.zhiw.mooc.presenter.TestPresenter;
-import com.zhiw.mooc.ui.IView.ITestView;
+import com.zhiw.mooc.ui.IView.TestView;
 
 import java.util.List;
 
@@ -26,7 +26,7 @@ import butterknife.ButterKnife;
  * Use the {@link TestFragment#newInstance} factory method to
  * create an instance of this fragment.
  */
-public class TestFragment extends BaseFragment implements ITestView {
+public class TestFragment extends BaseFragment implements TestView {
 
     public static final String TAG = "Test";
     @Bind(R.id.recycler_view)

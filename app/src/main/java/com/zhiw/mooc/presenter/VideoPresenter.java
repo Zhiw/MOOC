@@ -4,7 +4,7 @@ import android.app.Activity;
 
 import com.zhiw.mooc.framework.base.BasePresenter;
 import com.zhiw.mooc.model.Video;
-import com.zhiw.mooc.ui.IView.IVideoView;
+import com.zhiw.mooc.ui.IView.VideoView;
 
 import java.util.List;
 
@@ -16,8 +16,8 @@ import cn.bmob.v3.listener.FindListener;
  * Desc:
  * Created by zhiw on 16/3/30.
  */
-public class VideoPresenter extends BasePresenter<IVideoView> {
-    public VideoPresenter(Activity activity, IVideoView viewImpl) {
+public class VideoPresenter extends BasePresenter<VideoView> {
+    public VideoPresenter(Activity activity, VideoView viewImpl) {
         super(activity, viewImpl);
     }
 

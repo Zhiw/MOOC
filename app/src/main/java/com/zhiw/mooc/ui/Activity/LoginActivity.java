@@ -37,7 +37,7 @@ import android.widget.TextView;
 import com.zhiw.mooc.R;
 import com.zhiw.mooc.framework.base.BaseActivity;
 import com.zhiw.mooc.presenter.LoginPresenter;
-import com.zhiw.mooc.ui.IView.ILoginView;
+import com.zhiw.mooc.ui.IView.LoginView;
 import com.zhiw.mooc.utils.ToastUtil;
 
 import java.util.ArrayList;
@@ -53,7 +53,7 @@ import static android.Manifest.permission.READ_CONTACTS;
 /**
  * A login screen that offers login via email/password.
  */
-public class LoginActivity extends BaseActivity implements LoaderCallbacks<Cursor>, ILoginView {
+public class LoginActivity extends BaseActivity implements LoaderCallbacks<Cursor>, LoginView {
 
     /**
      * Id to identity READ_CONTACTS permission request.

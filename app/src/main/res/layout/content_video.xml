@@ -5,7 +5,6 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    app:layout_behavior="@string/appbar_scrolling_view_behavior"
     tools:context="com.zhiw.mooc.ui.Activity.VideoActivity"
     tools:showIn="@layout/activity_video">
 
@@ -13,5 +12,37 @@
         android:id="@+id/video_view"
         android:layout_width="match_parent"
         android:layout_height="216dp"/>
+
+    <android.support.v7.widget.RecyclerView
+        android:id="@+id/comment_list"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_below="@id/video_view"
+        tools:listitem="@layout/item_comment"
+    >
+
+    </android.support.v7.widget.RecyclerView>
+
+    <RelativeLayout
+        android:id="@+id/comment_layout"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+    >
+        <EditText
+            android:id="@+id/comment_content_et"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_toStartOf="@+id/submit_comment_btn"
+            android:hint="说两句吧"/>
+        <Button
+            android:id="@+id/submit_comment_btn"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentEnd="true"
+            android:text="评论"/>
+
+    </RelativeLayout>
+
 
 </RelativeLayout>

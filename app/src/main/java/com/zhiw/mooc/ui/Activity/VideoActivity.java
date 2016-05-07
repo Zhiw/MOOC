@@ -1,30 +1,48 @@
 package com.zhiw.mooc.ui.Activity;
 
-import android.content.Intent;
 import android.os.Bundle;
-import android.support.design.widget.FloatingActionButton;
-import android.support.design.widget.Snackbar;
+import android.support.v7.widget.LinearLayoutManager;
+import android.support.v7.widget.RecyclerView;
 import android.view.View;
+import android.widget.EditText;
 
 import com.zhiw.mooc.R;
 import com.zhiw.mooc.framework.base.BaseActivity;
+import com.zhiw.mooc.framework.base.BaseRecyclerViewAdapter;
+import com.zhiw.mooc.framework.base.BaseViewHolder;
+import com.zhiw.mooc.model.Comment;
+import com.zhiw.mooc.presenter.MainVideoPresenter;
+import com.zhiw.mooc.ui.IView.MainVideoView;
 import com.zhiw.mooc.ui.widgets.MyMediaController;
 import com.zhiw.mooc.utils.FileUtil;
 import com.zhiw.mooc.utils.LogTool;
+import com.zhiw.mooc.utils.ToastUtil;
+
+import java.util.List;
 
 import butterknife.Bind;
 import butterknife.ButterKnife;
+import butterknife.OnClick;
 import io.vov.vitamio.LibsChecker;
 import io.vov.vitamio.MediaPlayer;
 import io.vov.vitamio.widget.VideoView;
 
-public class VideoActivity extends BaseActivity {
-
-    @Bind(R.id.video_view)
-    VideoView mVideoView;
+public class VideoActivity extends BaseActivity implements MainVideoView {
 
     public static final String EXTRA_URL = "url";
     public static final String EXTRA_TITLE = "title";
+    public static final String EXTRA_ID = "id";
+
+    @Bind(R.id.video_view)
+    VideoView mVideoView;
+    @Bind(R.id.comment_content_et)
+    EditText mCommentContentEt;
+    @Bind(R.id.comment_list)
+    RecyclerView mCommentList;
+
+    private MainVideoPresenter mPresenter;
+
+    private String objectId;
 
 
     @Override
@@ -35,21 +53,44 @@ public class VideoActivity extends BaseActivity {
         }
         setContentView(R.layout.activity_video);
         ButterKnife.bind(this);
+
+        mPresenter = new MainVideoPresenter(this, this);
+        mPresenter.init();
+        objectId = getIntent().getStringExtra(EXTRA_ID);
+        ToastUtil.get().showShortToast(this,objectId);
+        mPresenter.getCommentList(objectId);
+
+
+        /*FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.fab);
+        fab.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Snackbar.make(view, "Replace with your own action", Snackbar.LENGTH_LONG)
+                        .setAction("Action", null).show();
+                Intent intent = new Intent(VideoActivity.this, ScrollingActivity.class);
+                startActivity(intent);
+            }
+        });*/
+    }
+
+
+    @Override
+    public void initView(View view) {
         String defaultPath = FileUtil.getRootPath() + "/test.mov";
         LogTool.e(defaultPath);
 //        String defaultPath = "http://www.modrails.com/videos/passenger_nginx.mov";
         String url = getIntent().hasExtra(EXTRA_URL) ? getIntent().getStringExtra(EXTRA_URL) : defaultPath;
         String title = getIntent().getStringExtra(EXTRA_TITLE);
+
         setTitle(title);
-
-//        showLoadingView(true);
-
         mVideoView = (VideoView) findViewById(R.id.video_view);
-        mVideoView.setVideoPath(url);
+        if (mVideoView != null) {
+            mVideoView.setVideoPath(url);
+        }
         final MyMediaController myMediaController = new MyMediaController(this);
         int windowHeight = getResources().getDisplayMetrics().heightPixels;
 
-        myMediaController.setPadding(0,0,0,windowHeight - 594);
+        myMediaController.setPadding(0, 0, 0, windowHeight - 594);
 
         mVideoView.setMediaController(myMediaController);
         mVideoView.requestFocus();
@@ -60,23 +101,51 @@ public class VideoActivity extends BaseActivity {
             }
         });
 
-        FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.fab);
-        fab.setOnClickListener(new View.OnClickListener() {
+        mCommentList.setLayoutManager(new LinearLayoutManager(this));
+    }
+
+    @Override
+    public void initListener() {
+
+    }
+
+    @Override
+    public void showLoading(boolean show) {
+
+    }
+
+
+    @Override
+    public void refreshCommentList(List<Comment> list) {
+        BaseRecyclerViewAdapter<Comment> adapter=new BaseRecyclerViewAdapter<Comment>(list,this,R.layout.item_comment) {
             @Override
-            public void onClick(View view) {
-                Snackbar.make(view, "Replace with your own action", Snackbar.LENGTH_LONG)
-                        .setAction("Action", null).show();
-                Intent intent = new Intent(VideoActivity.this, ScrollingActivity.class);
-                startActivity(intent);
+            public void onBindView(BaseViewHolder viewHolder, Comment item, int position) {
+                ToastUtil.get().showShortToast(VideoActivity.this,item.getUser().getUsername());
+                viewHolder.setText(R.id.comment_user_name,item.getUser().getUsername())
+                        .setText(R.id.comment_content,item.getContent())
+                        .setText(R.id.comment_time,item.getUpdatedAt());
+
             }
-        });
+        };
+        mCommentList.setAdapter(adapter);
+
+    }
+
+    @Override
+    public String getCommentContent() {
+        return mCommentContentEt.getText().toString().trim();
     }
 
     @Override
     protected void onDestroy() {
         super.onDestroy();
-        if (mVideoView!=null){
+        if (mVideoView != null) {
             mVideoView.stopPlayback();
         }
+    }
+
+    @OnClick(R.id.submit_comment_btn)
+    public void onClick() {
+        mPresenter.submitComment(objectId);
     }
 }

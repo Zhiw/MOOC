@@ -6,11 +6,11 @@ import com.zhiw.mooc.model.Video;
 import java.util.List;
 
 /**
- * ClassName: IVideoView
+ * ClassName: VideoView
  * Desc:
  * Created by zhiw on 16/3/30.
  */
-public interface IVideoView extends BaseView {
+public interface VideoView extends BaseView {
 
     /**
      *

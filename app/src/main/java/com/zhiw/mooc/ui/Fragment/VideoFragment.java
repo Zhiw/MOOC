@@ -17,7 +17,7 @@ import com.zhiw.mooc.framework.base.BaseFragment;
 import com.zhiw.mooc.model.Video;
 import com.zhiw.mooc.presenter.VideoPresenter;
 import com.zhiw.mooc.ui.Activity.VideoActivity;
-import com.zhiw.mooc.ui.IView.IVideoView;
+import com.zhiw.mooc.ui.IView.VideoView;
 import com.zhiw.mooc.ui.widgets.SpaceItemDecoration;
 
 import java.util.List;
@@ -30,7 +30,7 @@ import butterknife.ButterKnife;
  * <p/>
  * interface.
  */
-public class VideoFragment extends BaseFragment implements IVideoView{
+public class VideoFragment extends BaseFragment implements VideoView {
 
     public static final String TAG = "Video";
     @Bind(R.id.list)
@@ -80,12 +80,6 @@ public class VideoFragment extends BaseFragment implements IVideoView{
     @Override
     public void initView(View view) {
         mRecyclerView.setLayoutManager(new LinearLayoutManager(fragmentActivity));
-//        List<Video> list = new ArrayList<>();
-//        for (int i = 'A'; i < 'z'; i++) {
-//            Video video = new Video();
-//            video.setTitle("" + (char) i);
-//            list.add(video);
-//        }
         mAdapter = new MyVideoRecyclerViewAdapter();
         mRecyclerView.setAdapter(mAdapter);
 
@@ -120,6 +114,7 @@ public class VideoFragment extends BaseFragment implements IVideoView{
                 Intent intent = new Intent(fragmentActivity, VideoActivity.class);
 //                intent.putExtra(VideoActivity.EXTRA_URL,mAdapter.getDataFrom(position).getUrl());
                 intent.putExtra(VideoActivity.EXTRA_TITLE,mAdapter.getDataFrom(position).getTitle());
+                intent.putExtra(VideoActivity.EXTRA_ID,mAdapter.getDataFrom(position).getObjectId());
                 startActivity(intent);
             }
         };
