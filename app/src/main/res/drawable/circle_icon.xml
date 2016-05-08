@@ -2,6 +2,6 @@
 <layer-list xmlns:android="http://schemas.android.com/apk/res/android">
 
     <item android:drawable="@drawable/android_circle"/>
-    <item android:drawable="@drawable/android"/>
+    <item android:drawable="@drawable/book_open_page_variant"/>
 
 </layer-list>

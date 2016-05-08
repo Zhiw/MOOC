@@ -1,11 +1,13 @@
 package com.zhiw.mooc.model;
 
+import cn.bmob.v3.BmobObject;
+
 /**
  * ClassName: Test
  * Desc:
  * Created by zhiw on 16/4/17.
  */
-public class Test {
+public class Test extends BmobObject{
     private String subject;
     private String title;
 

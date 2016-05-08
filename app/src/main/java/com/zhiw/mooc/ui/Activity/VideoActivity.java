@@ -16,7 +16,6 @@ import com.zhiw.mooc.ui.IView.MainVideoView;
 import com.zhiw.mooc.ui.widgets.MyMediaController;
 import com.zhiw.mooc.utils.FileUtil;
 import com.zhiw.mooc.utils.LogTool;
-import com.zhiw.mooc.utils.ToastUtil;
 
 import java.util.List;
 
@@ -53,11 +52,11 @@ public class VideoActivity extends BaseActivity implements MainVideoView {
         }
         setContentView(R.layout.activity_video);
         ButterKnife.bind(this);
+        showLoadingView(true);
 
         mPresenter = new MainVideoPresenter(this, this);
         mPresenter.init();
         objectId = getIntent().getStringExtra(EXTRA_ID);
-        ToastUtil.get().showShortToast(this,objectId);
         mPresenter.getCommentList(objectId);
 
 
@@ -97,6 +96,7 @@ public class VideoActivity extends BaseActivity implements MainVideoView {
         mVideoView.setOnPreparedListener(new MediaPlayer.OnPreparedListener() {
             @Override
             public void onPrepared(MediaPlayer mp) {
+                showLoadingView(false);
                 mp.setPlaybackSpeed(1.0f);
             }
         });
@@ -111,6 +111,7 @@ public class VideoActivity extends BaseActivity implements MainVideoView {
 
     @Override
     public void showLoading(boolean show) {
+        showLoadingView(show);
 
     }
 
@@ -120,7 +121,6 @@ public class VideoActivity extends BaseActivity implements MainVideoView {
         BaseRecyclerViewAdapter<Comment> adapter=new BaseRecyclerViewAdapter<Comment>(list,this,R.layout.item_comment) {
             @Override
             public void onBindView(BaseViewHolder viewHolder, Comment item, int position) {
-                ToastUtil.get().showShortToast(VideoActivity.this,item.getUser().getUsername());
                 viewHolder.setText(R.id.comment_user_name,item.getUser().getUsername())
                         .setText(R.id.comment_content,item.getContent())
                         .setText(R.id.comment_time,item.getUpdatedAt());

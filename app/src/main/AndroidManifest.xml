@@ -110,6 +110,8 @@
 
         <activity android:name=".ui.Activity.SignInActivity">
         </activity>
+        <activity android:name=".ui.Activity.ExerciseActivity">
+        </activity>
     </application>
 
 </manifest>

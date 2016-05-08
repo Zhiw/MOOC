@@ -65,6 +65,10 @@ public class TestRecyclerViewAdapter extends RecyclerView.Adapter<TestRecyclerVi
         return mList.size();
     }
 
+    public Test getItem(int position){
+        return mList.get(position);
+    }
+
     class ViewHolder extends RecyclerView.ViewHolder {
         @Bind(R.id.subject)
         TextView mSubject;

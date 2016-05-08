@@ -1,6 +1,7 @@
 package com.zhiw.mooc.ui.Fragment;
 
 import android.content.Context;
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v7.widget.RecyclerView;
@@ -13,6 +14,7 @@ import com.zhiw.mooc.adapter.TestRecyclerViewAdapter;
 import com.zhiw.mooc.framework.base.BaseFragment;
 import com.zhiw.mooc.model.Test;
 import com.zhiw.mooc.presenter.TestPresenter;
+import com.zhiw.mooc.ui.Activity.ExerciseActivity;
 import com.zhiw.mooc.ui.IView.TestView;
 
 import java.util.List;
@@ -81,7 +83,11 @@ public class TestFragment extends BaseFragment implements TestView {
         TestRecyclerViewAdapter.OnItemClickListener listener = new TestRecyclerViewAdapter.OnItemClickListener() {
             @Override
             public void onItemClick(View view, int position) {
-
+                Test test = mAdapter.getItem(position);
+                Intent intent = new Intent(fragmentActivity, ExerciseActivity.class);
+                intent.putExtra(ExerciseActivity.EXTRA_ID, test.getObjectId());
+                intent.putExtra(ExerciseActivity.EXTRA_TITLE, test.getTitle());
+                startActivity(intent);
             }
         };
 
