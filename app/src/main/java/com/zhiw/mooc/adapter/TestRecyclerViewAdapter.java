@@ -1,13 +1,13 @@
 package com.zhiw.mooc.adapter;
 
+import com.zhiw.mooc.R;
+import com.zhiw.mooc.model.Test;
+
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
-
-import com.zhiw.mooc.R;
-import com.zhiw.mooc.model.Test;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -44,13 +44,14 @@ public class TestRecyclerViewAdapter extends RecyclerView.Adapter<TestRecyclerVi
     }
 
     @Override
-    public void onBindViewHolder(ViewHolder holder, final int position) {
-        Test test = mList.get(position);
+    public void onBindViewHolder(ViewHolder holder, int position) {
+        final int pos=holder.getAdapterPosition();
+        Test test = mList.get(pos);
         holder.itemView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 if (mListener!=null){
-                    mListener.onItemClick(view,position);
+                    mListener.onItemClick(view,pos);
                 }
             }
         });

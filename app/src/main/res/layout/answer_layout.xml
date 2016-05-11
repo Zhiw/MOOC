@@ -19,5 +19,5 @@
         android:visibility="gone"
         tools:visibility="visible"
         android:text="这道题目很简单的"
-        android:layout_below="@+id/see_right_answer_btn"/>
+    />
 </merge>

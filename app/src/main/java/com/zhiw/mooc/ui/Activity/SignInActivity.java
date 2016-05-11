@@ -1,10 +1,5 @@
 package com.zhiw.mooc.ui.Activity;
 
-import android.os.Bundle;
-import android.view.View;
-import android.widget.Button;
-import android.widget.EditText;
-
 import com.baidu.location.BDLocation;
 import com.baidu.location.BDLocationListener;
 import com.baidu.location.LocationClient;
@@ -15,6 +10,11 @@ import com.zhiw.mooc.framework.base.BaseActivity;
 import com.zhiw.mooc.presenter.SignInPresenter;
 import com.zhiw.mooc.ui.IView.SignInView;
 import com.zhiw.mooc.utils.LogTool;
+
+import android.os.Bundle;
+import android.view.View;
+import android.widget.Button;
+import android.widget.EditText;
 
 import java.util.List;
 
@@ -54,6 +54,8 @@ public class SignInActivity extends BaseActivity implements SignInView {
         mLocationClient.registerLocationListener(myListener);
         initLocation();
         mLocationClient.start();
+        String code=getIntent().getStringExtra("code");
+        mCourseCode.setText(code);
     }
 
     @Override

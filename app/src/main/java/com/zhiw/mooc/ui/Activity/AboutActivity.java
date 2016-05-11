@@ -1,5 +1,9 @@
 package com.zhiw.mooc.ui.Activity;
 
+import com.thefinestartist.finestwebview.FinestWebView;
+import com.zhiw.mooc.R;
+import com.zhiw.mooc.framework.base.BaseActivity;
+
 import android.os.Bundle;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
@@ -13,10 +17,6 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
-
-import com.thefinestartist.finestwebview.FinestWebView;
-import com.zhiw.mooc.R;
-import com.zhiw.mooc.framework.base.BaseActivity;
 
 import butterknife.Bind;
 import butterknife.ButterKnife;
@@ -134,13 +134,14 @@ public class AboutActivity extends BaseActivity {
         }
 
         @Override
-        public void onBindViewHolder(RecyclerView.ViewHolder holder, final int position) {
+        public void onBindViewHolder(RecyclerView.ViewHolder holder,  int position) {
             if (holder.getItemViewType() == 1){
-                ((ItemViewHolder)holder).mItemText.setText(mLibsList.keyAt(position - 1));
+                final int pos=holder.getAdapterPosition();
+                ((ItemViewHolder)holder).mItemText.setText(mLibsList.keyAt(pos - 1));
                 ((ItemViewHolder)holder).mItemText.setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View view) {
-                        openUrl(mLibsList.valueAt(position - 1));
+                        openUrl(mLibsList.valueAt(pos - 1));
                     }
                 });
             }

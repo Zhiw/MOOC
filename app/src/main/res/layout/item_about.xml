@@ -10,6 +10,7 @@
         android:padding="8dp"
         android:gravity="center_vertical"
         android:paddingStart="24dp"
+        android:paddingEnd="24dp"
         android:text="Android"
         />
     <View

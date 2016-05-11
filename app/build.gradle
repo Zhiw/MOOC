@@ -38,4 +38,5 @@ dependencies {
     compile 'com.facebook.fresco:fresco:0.6.0'
     compile 'com.github.shts:TriangleLabelView:1.0.0'
     compile 'com.thefinestartist:finestwebview:1.2.1'
+    compile 'cn.bmob.android:bmob-push:0.8'
 }

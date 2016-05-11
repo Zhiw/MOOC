@@ -14,8 +14,7 @@
         android:text="@string/hello_blank_fragment"/>
 
     <RadioGroup
-        android:id="@+id/choice_group"
-        android:layout_width="match_parent"
+            android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginStart="16dp"
         >
