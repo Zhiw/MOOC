@@ -1,10 +1,11 @@
 package com.zhiw.mooc.presenter;
 
-import android.app.Activity;
-
 import com.zhiw.mooc.framework.base.BasePresenter;
 import com.zhiw.mooc.model.Attendance;
 import com.zhiw.mooc.ui.IView.SignInView;
+import com.zhiw.mooc.utils.SystemUtils;
+
+import android.app.Activity;
 
 import cn.bmob.v3.BmobUser;
 import cn.bmob.v3.listener.SaveListener;
@@ -27,11 +28,14 @@ public class SignInPresenter extends BasePresenter<SignInView> {
         double longitude = viewImpl.getLongitude();
         String address = viewImpl.getAddress();
         String description = viewImpl.getDescription();
-        Attendance attendance = new Attendance(user, latitude, longitude, address, description);
+        String device = SystemUtils.getDeviceId(activity);
+        String code = viewImpl.getCode();
+        Attendance attendance = new Attendance(user, latitude, longitude, address, description, device, code);
 
         attendance.save(activity, new SaveListener() {
             @Override
             public void onSuccess() {
+                viewImpl.SignInSuccess();
 
             }
 

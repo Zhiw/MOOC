@@ -15,6 +15,7 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.TextView;
 
 import java.util.List;
 
@@ -29,6 +30,8 @@ public class SignInActivity extends BaseActivity implements SignInView {
     Button mSignInButton;
     @Bind(R.id.course_code)
     EditText mCourseCode;
+    @Bind(R.id.location)
+    TextView mLocation;
 
     private SignInPresenter mPresenter;
 
@@ -49,12 +52,12 @@ public class SignInActivity extends BaseActivity implements SignInView {
 
     @Override
     public void initView(View view) {
-        setTitle("SIGN IN");
+        setTitle("CHECK IN");
         mLocationClient = new LocationClient(getApplicationContext());
         mLocationClient.registerLocationListener(myListener);
         initLocation();
         mLocationClient.start();
-        String code=getIntent().getStringExtra("code");
+        String code = getIntent().getStringExtra("code");
         mCourseCode.setText(code);
     }
 
@@ -91,6 +94,11 @@ public class SignInActivity extends BaseActivity implements SignInView {
     @Override
     public String getCode() {
         return mCourseCode.getText().toString().trim();
+    }
+
+    @Override
+    public void SignInSuccess() {
+
     }
 
     @Override
@@ -133,6 +141,8 @@ public class SignInActivity extends BaseActivity implements SignInView {
             longitude = location.getLongitude();
             address = location.getAddrStr();
             description = location.getLocationDescribe();
+
+            mLocation.setText("当前位置："+address);
             //Receive Location
             StringBuffer sb = new StringBuffer(256);
             sb.append("time : ");

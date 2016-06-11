@@ -1,11 +1,5 @@
 package com.zhiw.mooc.ui.Activity;
 
-import android.os.Bundle;
-import android.support.v7.widget.LinearLayoutManager;
-import android.support.v7.widget.RecyclerView;
-import android.view.View;
-import android.widget.EditText;
-
 import com.zhiw.mooc.R;
 import com.zhiw.mooc.framework.base.BaseActivity;
 import com.zhiw.mooc.framework.base.BaseRecyclerViewAdapter;
@@ -16,6 +10,12 @@ import com.zhiw.mooc.ui.IView.MainVideoView;
 import com.zhiw.mooc.ui.widgets.MyMediaController;
 import com.zhiw.mooc.utils.FileUtil;
 import com.zhiw.mooc.utils.LogTool;
+
+import android.os.Bundle;
+import android.support.v7.widget.LinearLayoutManager;
+import android.support.v7.widget.RecyclerView;
+import android.view.View;
+import android.widget.EditText;
 
 import java.util.List;
 
@@ -59,17 +59,6 @@ public class VideoActivity extends BaseActivity implements MainVideoView {
         objectId = getIntent().getStringExtra(EXTRA_ID);
         mPresenter.getCommentList(objectId);
 
-
-        /*FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.fab);
-        fab.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                Snackbar.make(view, "Replace with your own action", Snackbar.LENGTH_LONG)
-                        .setAction("Action", null).show();
-                Intent intent = new Intent(VideoActivity.this, ScrollingActivity.class);
-                startActivity(intent);
-            }
-        });*/
     }
 
 
@@ -89,7 +78,7 @@ public class VideoActivity extends BaseActivity implements MainVideoView {
         final MyMediaController myMediaController = new MyMediaController(this);
         int windowHeight = getResources().getDisplayMetrics().heightPixels;
 
-        myMediaController.setPadding(0, 0, 0, windowHeight - 594);
+        myMediaController.setPadding(0, 0, 0, windowHeight - 594+50);
 
         mVideoView.setMediaController(myMediaController);
         mVideoView.requestFocus();
@@ -134,6 +123,13 @@ public class VideoActivity extends BaseActivity implements MainVideoView {
     @Override
     public String getCommentContent() {
         return mCommentContentEt.getText().toString().trim();
+    }
+
+    @Override
+    public void SubmitSuccess() {
+        mCommentContentEt.setText("");
+        mCommentContentEt.clearFocus();
+        mPresenter.getCommentList(objectId);
     }
 
     @Override

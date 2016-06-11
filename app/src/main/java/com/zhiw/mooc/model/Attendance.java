@@ -14,13 +14,17 @@ public class Attendance extends BmobObject {
     private double longitude;
     private String address;
     private String description;
+    private String device;
+    private String code;
 
-    public Attendance(BmobUser student, double latitude, double longitude, String address, String description) {
+    public Attendance(BmobUser student, double latitude, double longitude, String address, String description, String device, String code) {
         this.student = student;
         this.latitude = latitude;
         this.longitude = longitude;
         this.address = address;
         this.description = description;
+        this.device = device;
+        this.code = code;
     }
 
 
@@ -62,5 +66,21 @@ public class Attendance extends BmobObject {
 
     public void setDescription(String description) {
         this.description = description;
+    }
+
+    public String getDevice() {
+        return device;
+    }
+
+    public void setDevice(String device) {
+        this.device = device;
+    }
+
+    public String getCode() {
+        return code;
+    }
+
+    public void setCode(String code) {
+        this.code = code;
     }
 }

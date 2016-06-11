@@ -1,14 +1,14 @@
 package com.zhiw.mooc.adapter;
 
+import com.zhiw.mooc.R;
+import com.zhiw.mooc.model.Video;
+
 import android.support.v7.widget.CardView;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
-
-import com.zhiw.mooc.R;
-import com.zhiw.mooc.model.Video;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -62,6 +62,7 @@ public class MyVideoRecyclerViewAdapter extends RecyclerView.Adapter<MyVideoRecy
 
 
     public void addData(List<Video> data){
+        mList.clear();
         mList.addAll(data);
         notifyDataSetChanged();
 

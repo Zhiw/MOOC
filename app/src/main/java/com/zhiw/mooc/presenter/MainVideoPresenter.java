@@ -1,11 +1,12 @@
 package com.zhiw.mooc.presenter;
 
-import android.app.Activity;
-
 import com.zhiw.mooc.framework.base.BasePresenter;
 import com.zhiw.mooc.model.Comment;
 import com.zhiw.mooc.model.Video;
 import com.zhiw.mooc.ui.IView.MainVideoView;
+import com.zhiw.mooc.utils.ToastUtil;
+
+import android.app.Activity;
 
 import java.util.List;
 
@@ -60,11 +61,14 @@ public class MainVideoPresenter extends BasePresenter<MainVideoView> {
         comment.save(activity, new SaveListener() {
             @Override
             public void onSuccess() {
+                ToastUtil.get().showShortToast(activity,"提交成功");
+                viewImpl.SubmitSuccess();
 
             }
 
             @Override
             public void onFailure(int i, String s) {
+                ToastUtil.get().showShortToast(activity,"提交失败");
 
             }
         });

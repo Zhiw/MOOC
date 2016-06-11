@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
-<manifest package="com.zhiw.mooc"
-          xmlns:android="http://schemas.android.com/apk/res/android">
+<manifest xmlns:android="http://schemas.android.com/apk/res/android"
+          package="com.zhiw.mooc">
 
     <uses-permission android:name="android.permission.WAKE_LOCK"/>
     <uses-permission android:name="android.permission.INTERNET"/>
@@ -27,29 +27,25 @@
     <!-- SD卡读取权限，用户写入离线定位数据 -->
     <uses-permission android:name="android.permission.MOUNT_UNMOUNT_FILESYSTEMS"/>
 
-    <!-- To auto-complete the email text field in the login form with the user's emails -->
-    <uses-permission android:name="android.permission.GET_ACCOUNTS"/>
-    <uses-permission android:name="android.permission.READ_PROFILE"/>
-    <uses-permission android:name="android.permission.READ_CONTACTS"/>
-    <!--bmob push permission-->
-    <uses-permission android:name="android.permission.RECEIVE_USER_PRESENT" />
-    <uses-permission android:name="android.permission.RECEIVE_BOOT_COMPLETED" />
+    <!-- bmob push permission -->
+    <uses-permission android:name="android.permission.RECEIVE_USER_PRESENT"/>
+    <uses-permission android:name="android.permission.RECEIVE_BOOT_COMPLETED"/>
 
     <application
-        android:name=".MOOCApplication"
-        android:allowBackup="true"
-        android:icon="@drawable/book_open_page_variant"
-        android:label="@string/app_name"
-        android:supportsRtl="true"
-        android:theme="@style/AppTheme">
+            android:name=".MOOCApplication"
+            android:allowBackup="true"
+            android:icon="@drawable/book_open_page_variant"
+            android:label="@string/app_name"
+            android:supportsRtl="true"
+            android:theme="@style/AppTheme">
         <meta-data
-            android:name="com.baidu.lbsapi.API_KEY"
-            android:value="aESqMUGvyqaxZSn6udmF4xL4"/>
+                android:name="com.baidu.lbsapi.API_KEY"
+                android:value="aESqMUGvyqaxZSn6udmF4xL4"/>
 
         <activity
-            android:name=".ui.Activity.MainActivity"
-            android:label="@string/app_name"
-            android:theme="@style/AppTheme.NoActionBar">
+                android:name=".ui.Activity.MainActivity"
+                android:label="@string/app_name"
+                android:theme="@style/AppTheme">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN"/>
 
@@ -57,58 +53,56 @@
             </intent-filter>
         </activity>
         <activity
-            android:name=".framework.base.BaseActivity"
-            android:label="@string/title_activity_base"
-            android:theme="@style/AppTheme.NoActionBar">
+                android:name=".framework.base.BaseActivity"
+                android:label="@string/title_activity_base"
+                android:theme="@style/AppTheme.NoActionBar">
         </activity>
         <activity
-            android:name=".ui.Activity.VideoActivity"
-            android:label="@string/title_activity_video"
-            android:process=".vitamio"
-            android:theme="@style/AppTheme">
+                android:name=".ui.Activity.VideoActivity"
+                android:label="@string/title_activity_video"
+                android:process=".vitamio"
+                android:theme="@style/AppTheme">
         </activity>
         <activity
-            android:name="io.vov.vitamio.activity.InitActivity"
-            android:configChanges="orientation|screenSize|smallestScreenSize|keyboard|keyboardHidden|navigation"
-            android:launchMode="singleTop"
-            android:theme="@android:style/Theme.NoTitleBar"
-            android:windowSoftInputMode="stateAlwaysHidden">
+                android:name="io.vov.vitamio.activity.InitActivity"
+                android:configChanges="orientation|screenSize|smallestScreenSize|keyboard|keyboardHidden|navigation"
+                android:launchMode="singleTop"
+                android:theme="@android:style/Theme.NoTitleBar"
+                android:windowSoftInputMode="stateAlwaysHidden">
         </activity>
         <activity
-            android:name=".ui.Activity.ScrollingActivity"
-            android:label="@string/title_activity_scrolling"
-            android:parentActivityName=".framework.base.BaseActivity"
-            android:theme="@style/AppTheme">
+                android:name=".ui.Activity.ScrollingActivity"
+                android:label="@string/title_activity_scrolling"
+                android:parentActivityName=".framework.base.BaseActivity"
+                android:theme="@style/AppTheme">
             <meta-data
-                android:name="android.support.PARENT_ACTIVITY"
-                android:value="com.zhiw.mooc.framework.base.BaseActivity"/>
+                    android:name="android.support.PARENT_ACTIVITY"
+                    android:value="com.zhiw.mooc.framework.base.BaseActivity"/>
         </activity>
         <activity
-            android:name=".ui.Activity.LoginActivity"
-            android:label="@string/title_activity_login"
-            android:theme="@style/AppTheme">
+                android:name=".ui.Activity.LoginActivity"
+                android:label="@string/title_activity_login"
+                android:theme="@style/AppTheme">
         </activity>
         <activity
-            android:name=".ui.Activity.AboutActivity"
-            android:label="@string/title_activity_about"
-            android:parentActivityName=".framework.base.BaseActivity"
-            android:theme="@style/AppTheme">
+                android:name=".ui.Activity.AboutActivity"
+                android:label="@string/title_activity_about"
+                android:parentActivityName=".framework.base.BaseActivity"
+                android:theme="@style/AppTheme">
             <meta-data
-                android:name="android.support.PARENT_ACTIVITY"
-                android:value="com.zhiw.mooc.framework.base.BaseActivity"/>
+                    android:name="android.support.PARENT_ACTIVITY"
+                    android:value="com.zhiw.mooc.framework.base.BaseActivity"/>
         </activity>
         <activity
-            android:name="com.thefinestartist.finestwebview.FinestWebViewActivity"
-            android:configChanges="keyboardHidden|orientation|screenSize"
-            android:screenOrientation="sensor"
-            android:theme="@style/WebViewTheme"/>
-        <!-- android:theme="@style/FinestWebViewTheme.Light" -->
-        <!-- /> -->
+                android:name="com.thefinestartist.finestwebview.FinestWebViewActivity"
+                android:configChanges="keyboardHidden|orientation|screenSize"
+                android:screenOrientation="sensor"
+                android:theme="@style/WebViewTheme"/>
 
         <service
-            android:name="com.baidu.location.f"
-            android:enabled="true"
-            android:process=":remote">
+                android:name="com.baidu.location.f"
+                android:enabled="true"
+                android:process=":remote">
         </service>
 
         <activity android:name=".ui.Activity.SignInActivity">
@@ -116,34 +110,44 @@
         <activity android:name=".ui.Activity.ExerciseActivity">
         </activity>
 
-        <!--bmom push-->
+        <!-- bmom push -->
         <service
-            android:label="PushService"
-            android:name="cn.bmob.push.lib.service.PushService"
-            android:process="cn.bmob.push"
-            android:exported="true">
+                android:name="cn.bmob.push.lib.service.PushService"
+                android:exported="true"
+                android:label="PushService"
+                android:process="cn.bmob.push">
             <intent-filter>
                 <action android:name="cn.bmob.push.lib.service.PushService"/>
             </intent-filter>
         </service>
 
-        <receiver android:name="cn.bmob.push.PushReceiver" >
+        <receiver android:name="cn.bmob.push.PushReceiver">
             <intent-filter>
+
                 <!-- 系统启动完成后会调用 -->
-                <action android:name="android.intent.action.BOOT_COMPLETED" />
+                <action android:name="android.intent.action.BOOT_COMPLETED"/>
                 <!-- 解锁完成后会调用 -->
-                <action android:name="android.intent.action.USER_PRESENT" />
+                <action android:name="android.intent.action.USER_PRESENT"/>
                 <!-- 监听网络连通性 -->
-                <action android:name="android.net.conn.CONNECTIVITY_CHANGE" />
+                <action android:name="android.net.conn.CONNECTIVITY_CHANGE"/>
             </intent-filter>
         </receiver>
 
         <!-- 第四部中创建的消息接收器，在这里进行注册 -->
         <receiver android:name=".BmobPushReceiver">
-            <intent-filter >
+            <intent-filter>
                 <action android:name="cn.bmob.push.action.MESSAGE"/>
             </intent-filter>
         </receiver>
+
+        <activity
+                android:name=".ui.Activity.SettingsActivity"
+                android:label="@string/title_activity_settings"
+                android:parentActivityName=".framework.base.BaseActivity">
+            <meta-data
+                    android:name="android.support.PARENT_ACTIVITY"
+                    android:value="com.zhiw.mooc.framework.base.BaseActivity"/>
+        </activity>
     </application>
 
 </manifest>

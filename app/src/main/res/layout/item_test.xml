@@ -48,22 +48,22 @@
             android:layout_toEndOf="@id/title"
             android:text="共14道题"/>
 
-        <jp.shts.android.library.TriangleLabelView
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_alignParentEnd="true"
-            android:layout_alignParentTop="true"
-            app:backgroundColor="@color/yellow_900"
-            app:corner="rightTop"
-            app:labelBottomPadding="5dp"
-            app:labelCenterPadding="0dp"
-            app:labelTopPadding="10dp"
-            app:primaryText="Done"
-            app:primaryTextColor="@color/yellow_500"
-            app:primaryTextSize="16sp"
-            app:secondaryText="Not"
-            app:secondaryTextColor="@color/yellow_100"
-            app:secondaryTextSize="11sp"/>
+        <!--<jp.shts.android.library.TriangleLabelView-->
+            <!--android:layout_width="match_parent"-->
+            <!--android:layout_height="wrap_content"-->
+            <!--android:layout_alignParentEnd="true"-->
+            <!--android:layout_alignParentTop="true"-->
+            <!--app:backgroundColor="@color/yellow_900"-->
+            <!--app:corner="rightTop"-->
+            <!--app:labelBottomPadding="5dp"-->
+            <!--app:labelCenterPadding="0dp"-->
+            <!--app:labelTopPadding="10dp"-->
+            <!--app:primaryText="Done"-->
+            <!--app:primaryTextColor="@color/yellow_500"-->
+            <!--app:primaryTextSize="16sp"-->
+            <!--app:secondaryText="Not"-->
+            <!--app:secondaryTextColor="@color/yellow_100"-->
+            <!--app:secondaryTextSize="11sp"/>-->
 
     </RelativeLayout>
 

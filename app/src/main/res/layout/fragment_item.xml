@@ -64,7 +64,7 @@
             app:primaryText="New"
             app:primaryTextColor="@color/yellow_500"
             app:primaryTextSize="16sp"
-            app:secondaryText="01"
+            app:secondaryText="\t"
             app:secondaryTextColor="@color/yellow_100"
             app:secondaryTextSize="11sp"/>
 

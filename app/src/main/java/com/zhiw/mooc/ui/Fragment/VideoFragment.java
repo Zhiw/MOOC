@@ -1,16 +1,5 @@
 package com.zhiw.mooc.ui.Fragment;
 
-import android.content.Intent;
-import android.os.Bundle;
-import android.os.Handler;
-import android.support.v4.widget.SwipeRefreshLayout;
-import android.support.v7.widget.DefaultItemAnimator;
-import android.support.v7.widget.LinearLayoutManager;
-import android.support.v7.widget.RecyclerView;
-import android.view.LayoutInflater;
-import android.view.View;
-import android.view.ViewGroup;
-
 import com.zhiw.mooc.R;
 import com.zhiw.mooc.adapter.MyVideoRecyclerViewAdapter;
 import com.zhiw.mooc.framework.base.BaseFragment;
@@ -19,6 +8,16 @@ import com.zhiw.mooc.presenter.VideoPresenter;
 import com.zhiw.mooc.ui.Activity.VideoActivity;
 import com.zhiw.mooc.ui.IView.VideoView;
 import com.zhiw.mooc.ui.widgets.SpaceItemDecoration;
+
+import android.content.Intent;
+import android.os.Bundle;
+import android.support.v4.widget.SwipeRefreshLayout;
+import android.support.v7.widget.DefaultItemAnimator;
+import android.support.v7.widget.LinearLayoutManager;
+import android.support.v7.widget.RecyclerView;
+import android.view.LayoutInflater;
+import android.view.View;
+import android.view.ViewGroup;
 
 import java.util.List;
 
@@ -75,6 +74,7 @@ public class VideoFragment extends BaseFragment implements VideoView {
     public void refreshUI(List<Video> data) {
 
         mAdapter.addData(data);
+        mSwipe.setRefreshing(false);
     }
 
     @Override
@@ -90,16 +90,17 @@ public class VideoFragment extends BaseFragment implements VideoView {
         mSwipe.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
             @Override
             public void onRefresh() {
-                Handler handler = new Handler();
-                handler.postDelayed(new Runnable() {
-                    @Override
-                    public void run() {
-                        Video video = new Video();
-                        video.setTitle("Google");
-                        mAdapter.insertData(6);
-                        mSwipe.setRefreshing(false);
-                    }
-                }, 3000);
+                mPresenter.getData();
+//                Handler handler = new Handler();
+//                handler.postDelayed(new Runnable() {
+//                    @Override
+//                    public void run() {
+//                        Video video = new Video();
+//                        video.setTitle("Google");
+//                        mAdapter.insertData(6);
+//                        mSwipe.setRefreshing(false);
+//                    }
+//                }, 3000);
 
 
             }

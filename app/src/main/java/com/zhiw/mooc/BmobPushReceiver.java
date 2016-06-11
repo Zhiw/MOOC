@@ -1,7 +1,6 @@
 package com.zhiw.mooc;
 
 import com.zhiw.mooc.ui.Activity.SignInActivity;
-import com.zhiw.mooc.utils.LogTool;
 
 import org.json.JSONException;
 import org.json.JSONObject;
@@ -26,7 +25,6 @@ public class BmobPushReceiver extends BroadcastReceiver {
     public void onReceive(Context context, Intent intent) {
         if (intent.getAction().contains(PushConstants.ACTION_MESSAGE)){
             String data=intent.getStringExtra("msg");
-            LogTool.e("收到推送"+data);
             String code= null;
             String title= null;
             String message= null;

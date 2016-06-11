@@ -1,23 +1,25 @@
 package com.zhiw.mooc.ui.Fragment;
 
 
-import android.os.Bundle;
-import android.support.v4.app.Fragment;
-import android.view.LayoutInflater;
-import android.view.View;
-import android.view.ViewGroup;
-import android.widget.EditText;
-import android.widget.TextView;
-
 import com.zhiw.mooc.R;
 import com.zhiw.mooc.framework.base.BaseFragment;
 import com.zhiw.mooc.model.Exercise;
 import com.zhiw.mooc.ui.Activity.ExerciseActivity;
 
+import android.os.Bundle;
+import android.support.v4.app.Fragment;
+import android.view.LayoutInflater;
+import android.view.View;
+import android.view.ViewGroup;
+import android.widget.Button;
+import android.widget.EditText;
+import android.widget.TextView;
+
 import java.util.Locale;
 
 import butterknife.Bind;
 import butterknife.ButterKnife;
+import butterknife.OnClick;
 
 /**
  * A simple {@link Fragment} subclass.
@@ -31,6 +33,10 @@ public class FillFragment extends BaseFragment {
     TextView mExerciseTopic;
     @Bind(R.id.answer_et)
     EditText mAnswerEt;
+    @Bind(R.id.see_right_answer_btn)
+    Button mSeeRightAnswerBtn;
+    @Bind(R.id.right_answer_tv)
+    TextView mRightAnswerTv;
 
     private int mPosition;
 
@@ -75,5 +81,10 @@ public class FillFragment extends BaseFragment {
     public void onDestroyView() {
         super.onDestroyView();
         ButterKnife.unbind(this);
+    }
+
+    @OnClick(R.id.see_right_answer_btn)
+    public void onClick() {
+        mRightAnswerTv.setVisibility(View.VISIBLE);
     }
 }

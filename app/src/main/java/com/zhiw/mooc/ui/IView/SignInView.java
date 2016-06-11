@@ -21,4 +21,6 @@ public interface SignInView extends BaseView {
 
     String getCode();
 
+    void SignInSuccess();
+
 }

@@ -1,15 +1,5 @@
 package com.zhiw.mooc.ui.Fragment;
 
-import android.content.ComponentName;
-import android.content.Context;
-import android.content.Intent;
-import android.os.Bundle;
-import android.support.v4.app.Fragment;
-import android.support.v7.widget.RecyclerView;
-import android.view.LayoutInflater;
-import android.view.View;
-import android.view.ViewGroup;
-
 import com.zhiw.mooc.R;
 import com.zhiw.mooc.adapter.DocumentRecyclerViewAdapter;
 import com.zhiw.mooc.framework.base.BaseFragment;
@@ -17,12 +7,29 @@ import com.zhiw.mooc.model.Document;
 import com.zhiw.mooc.presenter.DocumentPresenter;
 import com.zhiw.mooc.ui.IView.DocumentView;
 import com.zhiw.mooc.utils.FileUtil;
+import com.zhiw.mooc.utils.LogTool;
 import com.zhiw.mooc.utils.ToastUtil;
 
+import android.content.ComponentName;
+import android.content.Context;
+import android.content.Intent;
+import android.net.Uri;
+import android.os.Bundle;
+import android.os.Environment;
+import android.support.design.widget.Snackbar;
+import android.support.v4.app.Fragment;
+import android.support.v7.widget.RecyclerView;
+import android.view.LayoutInflater;
+import android.view.View;
+import android.view.ViewGroup;
+
+import java.io.File;
 import java.util.List;
 
 import butterknife.Bind;
 import butterknife.ButterKnife;
+import cn.bmob.v3.datatype.BmobFile;
+import cn.bmob.v3.listener.DownloadFileListener;
 
 /**
  * A simple {@link Fragment} subclass.
@@ -31,19 +38,11 @@ import butterknife.ButterKnife;
  * create an instance of this fragment.
  */
 public class DocumentFragment extends BaseFragment implements DocumentView {
-    // TODO: Rename parameter arguments, choose names that match
-    // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
-    private static final String ARG_PARAM1 = "param1";
-    private static final String ARG_PARAM2 = "param2";
+
 
     public static final String TAG = "Document";
     @Bind(R.id.recycler_view)
     RecyclerView mRecyclerView;
-
-
-    // TODO: Rename and change types of parameters
-    private String mParam1;
-    private String mParam2;
 
 
     private DocumentPresenter mPresenter;
@@ -54,22 +53,14 @@ public class DocumentFragment extends BaseFragment implements DocumentView {
     }
 
 
-    public static DocumentFragment newInstance(String param1, String param2) {
+    public static DocumentFragment newInstance() {
         DocumentFragment fragment = new DocumentFragment();
-        Bundle args = new Bundle();
-        args.putString(ARG_PARAM1, param1);
-        args.putString(ARG_PARAM2, param2);
-        fragment.setArguments(args);
         return fragment;
     }
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        if (getArguments() != null) {
-            mParam1 = getArguments().getString(ARG_PARAM1);
-            mParam2 = getArguments().getString(ARG_PARAM2);
-        }
     }
 
     @Override
@@ -108,13 +99,13 @@ public class DocumentFragment extends BaseFragment implements DocumentView {
             @Override
             public void onItemClick(View view, int position) {
 //                String url = mAdapter.getDataFrom(position).getUrl();
-                String temp = FileUtil.getRootPath()+"/test.pptx";
+                String temp = FileUtil.getRootPath() + "/test.pptx";
                 Intent intent = FileUtil.getFileIntent(temp);
                 ComponentName name = intent.resolveActivity(fragmentActivity.getPackageManager());
-                if (name!=null){
+                if (name != null) {
                     startActivity(intent);
-                }else {
-                    ToastUtil.get().showShortToast(fragmentActivity,"No app to open this file");
+                } else {
+                    ToastUtil.get().showShortToast(fragmentActivity, "No app to open this file");
                 }
 
             }
@@ -122,6 +113,32 @@ public class DocumentFragment extends BaseFragment implements DocumentView {
             @Override
             public void onDownLoadClick(View view, int position) {
                 // TODO: 16/4/10 download
+                Document document = mAdapter.getDataFrom(position);
+                String url = document.getUrl();
+                String name=url.substring(url.lastIndexOf("/")+1);
+                LogTool.e(name);
+                final File file=new File(Environment.getExternalStorageDirectory(),name);
+                BmobFile bmobfile = new BmobFile(name, "", url);
+                bmobfile.download(fragmentActivity, file,new DownloadFileListener() {
+                    @Override
+                    public void onSuccess(String s) {
+                        Snackbar.make(mRecyclerView,"下载成功",Snackbar.LENGTH_LONG)
+                                .setAction("查看", new View.OnClickListener() {
+                                    @Override
+                                    public void onClick(View view) {
+                                        Intent intent=new Intent(Intent.ACTION_VIEW);
+                                        intent.setDataAndType(Uri.fromFile(file),"image/*");
+                                        startActivity(intent);
+                                    }
+                                })
+                                .show();
+                    }
+
+                    @Override
+                    public void onFailure(int i, String s) {
+
+                    }
+                });
 
 
             }

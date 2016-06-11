@@ -8,12 +8,9 @@ import com.zhiw.mooc.ui.Fragment.DocumentFragment;
 import com.zhiw.mooc.ui.Fragment.LogoutDialogFragment;
 import com.zhiw.mooc.ui.Fragment.TestFragment;
 import com.zhiw.mooc.ui.Fragment.VideoFragment;
+import com.zhiw.mooc.utils.ToastUtil;
 
 import android.app.DialogFragment;
-import android.app.Notification;
-import android.app.NotificationManager;
-import android.app.PendingIntent;
-import android.content.Context;
 import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
@@ -25,7 +22,6 @@ import android.support.v4.view.GravityCompat;
 import android.support.v4.view.ViewPager;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBarDrawerToggle;
-import android.support.v7.app.NotificationCompat;
 import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
@@ -80,31 +76,7 @@ public class MainActivity extends BaseActivity
         mFab.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                int notificationId = 1;
-                NotificationManager manager = (NotificationManager) getSystemService(Context.NOTIFICATION_SERVICE);
 
-                NotificationCompat.Builder builder = new NotificationCompat.Builder(MainActivity.this);
-
-                Intent intent = new Intent(MainActivity.this, SignInActivity.class);
-                intent.putExtra("code","89757");
-                PendingIntent pendingIntent = PendingIntent.getActivity(
-                        MainActivity.this,
-                        0,
-                        intent,
-                        PendingIntent.FLAG_UPDATE_CURRENT
-                );
-                builder.setSmallIcon(R.drawable.book_open_page_variant)
-                        .setContentTitle("签到提醒")
-                        .setContentIntent(pendingIntent)
-                        .setContentText("李老师上课了，快来签到吧")
-                        .setAutoCancel(true)
-                        .setDefaults(Notification.DEFAULT_ALL
-                        );
-                manager.notify(notificationId, builder.build());
-//                Snackbar.make(view, "Replace with your own action", Snackbar.LENGTH_LONG)
-//                        .setAction("Action", null).show();
-//                Intent intent = new Intent(MainActivity.this, VideoActivity.class);
-//                startActivity(intent);
 
             }
         });
@@ -219,7 +191,10 @@ public class MainActivity extends BaseActivity
         if (id == R.id.nav_camera) {
             // Handle the camera action
             startActivity(SignInActivity.class);
-        } else if (id == R.id.nav_gallery) {
+        } else {
+            ToastUtil.get().showShortToast(MainActivity.this,"功能待开发");
+        }
+//        else if (id == R.id.nav_gallery) {
 //            boolean isDefault = !SPHelper.getTheme(this);
 //            SPHelper.setTheme(this, isDefault);
 //            finish();
@@ -228,24 +203,25 @@ public class MainActivity extends BaseActivity
 //            startActivity(intent);
 //            overridePendingTransition(0, 0);
 
-        } else if (id == R.id.nav_slideshow) {
-
-        } else if (id == R.id.nav_manage) {
-
-        } else if (id == R.id.nav_share) {
-
-        } else if (id == R.id.nav_send) {
-
-        }
+//        } else if (id == R.id.nav_slideshow) {
+//
+//        } else if (id == R.id.nav_manage) {
+//
+//        } else if (id == R.id.nav_share) {
+//
+//        } else if (id == R.id.nav_send) {
+//
+//        }else if (id==R.id.action_settings){
+//        }
 
         mDrawerLayout.closeDrawer(GravityCompat.START);
-        return true;
+        return false;
     }
 
     private void initTabLayout() {
         ViewPagerAdapter adapter = new ViewPagerAdapter(getSupportFragmentManager());
         VideoFragment videoFragment = VideoFragment.newInstance();
-        DocumentFragment documentFragment = DocumentFragment.newInstance("", "");
+        DocumentFragment documentFragment = DocumentFragment.newInstance();
         TestFragment testFragment = TestFragment.newInstance();
 
         adapter.addFragment(videoFragment, VideoFragment.TAG);
